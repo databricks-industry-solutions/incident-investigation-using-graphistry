@@ -4,10 +4,8 @@
 [![POC](https://img.shields.io/badge/POC-10_days-green?style=for-the-badge)](https://databricks.com/try-databricks)
 
 # Incident Investigation using Graphistry
-___
-Contact Author: <lipyeow.lim@databricks.com>
 
-___
+Contact Author: <lipyeow.lim@databricks.com>
 
 ## Use Cases
 
@@ -19,10 +17,7 @@ Personas: SOC analyts, Incident Responders, Threat Hunters
 
 The above reference architecture only shows a specific data path for network packet capture data. In production, there will be many data paths for different cybersecurity  data sources.
 
-___
-
 ## Technical Overview
-
 
 ___
 
