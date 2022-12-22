@@ -15,6 +15,10 @@ Personas: SOC analyts, Incident Responders, Threat Hunters
 
 ## Reference Architecture
 
+![image](https://github.com/lipyeowlim/public/raw/main/img/incident-investigation/incident-investigation-graphistry-arch.png)
+
+The above reference architecture only shows a specific data path for network packet capture data. In production, there will be many data paths for different cybersecurity  data sources.
+
 ___
 
 ## Technical Overview
@@ -26,7 +30,7 @@ ___
 
 | library                                | description             | license    | source                                              |
 |----------------------------------------|-------------------------|------------|-----------------------------------------------------|
-| PyYAML                                 | Reading Yaml files      | MIT        | https://github.com/yaml/pyyaml                      |
+| Graphistry | GPU-accelerated graph visualization | BSD-3-Clause | https://github.com/graphistry/pygraphistry |
 
 ## Getting started
 
