@@ -11,6 +11,10 @@ Contact Author: <lipyeow.lim@databricks.com>
 
 Personas: SOC analyts, Incident Responders, Threat Hunters
 
+* Investigate an incident or alert to determine if it is true positive or false positive. If it is a true positive, determine the host and users impacted, so that remediation steps can be taken.
+* Investigate leads from a threat hunting exercise.
+* Hunt for threats given a piece of threat intelligence or a news release
+
 ## Reference Architecture
 
 ![image](https://github.com/lipyeowlim/public/raw/main/img/incident-investigation/incident-investigation-graphistry-arch.png)
@@ -26,6 +30,17 @@ ___
 | library                                | description             | license    | source                                              |
 |----------------------------------------|-------------------------|------------|-----------------------------------------------------|
 | Graphistry | GPU-accelerated graph visualization | BSD-3-Clause | https://github.com/graphistry/pygraphistry |
+
+## Pre-requisites
+
+1. Create a free graphistry account at https://hub.graphistry.com/ if you do not already have an account. Take note of your graphistry username and password. You will need them to use the graphistry visualization in the notebooks.
+2. Install the databricks CLI using the instructions: https://docs.databricks.com/dev-tools/cli/index.html
+3. Create a secret scope using the databricks CLI: 
+    databricks secrets create-scope --scope lipyeow-sec01
+4. Create a secret key storing the graphistry password:
+    databricks secrets put --scope lipyeow-sec01 --key graphistry-pw
+
+You could skip steps 2-4 above and put your graphistry password into the notebooks, but that is not recommended, because it is not a security best practice.
 
 ## Getting started
 
