@@ -111,12 +111,11 @@ display(df)
 # MAGIC   * `cobb` got a hit for kerberos client `marcus.cobb@ENEMYWATCH`. 
 # MAGIC   * Click on the row to highlight the point in the visualization.
 # MAGIC * Continue your investigations using the visualization and zoom in as needed.
-# MAGIC * You discover that the kerberos authentication is coming from `10.10.22.157`.
-# MAGIC * Looking at other kerberos requests from `10.10.22.157`, you discover that it maps to the host `desktop-nz875r4`. Is this host infected?
-# MAGIC * Looking at the graph, you see many DNS requests for `kamuchehddhgfgf.ddns.net` and you also see that it resolves to `37.0.10.22`
-# MAGIC * A bit of googling yields an important piece of info that `kamuchehddhgfgf.ddns.net` and `37.0.10.22` is a C2 server (see https://tria.ge/211103-1q6ljacear) 
-# MAGIC * Looking at the edges between `10.10.22.157` and `37.0.10.22`, you discover many `conn` edges (connections) and you now hypothesize that `10.10.22.157` is an infected node.
-# MAGIC * You double check the timestamps to validate that your hypothesis holds up.
+# MAGIC * Observe the kerberos authentication is coming from `10.10.22.157`.
+# MAGIC * Looking at other kerberos requests from `10.10.22.157`, observe that it maps to the host `desktop-nz875r4`. Is this host infected?
+# MAGIC * Observe the many DNS requests for `kamuchehddhgfgf.ddns.net` (colored red because threat intelligence considered it malicious) and observe that it resolves to `37.0.10.22`. A bit of research will show that `kamuchehddhgfgf.ddns.net` with IPv4 `37.0.10.22` is a C2 server (see https://tria.ge/211103-1q6ljacear) 
+# MAGIC * Looking at the edges between `10.10.22.157` and `37.0.10.22`, observe the many `conn` edges (connections) indicating data transfers.
+# MAGIC * There is sufficient evidence that `10.10.22.157` has been infected with malware.
 # MAGIC * You are now ready to write an incident report and take the required remediation actions.
 
 # COMMAND ----------
