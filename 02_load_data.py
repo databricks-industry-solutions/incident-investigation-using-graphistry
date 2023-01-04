@@ -1,4 +1,10 @@
 # Databricks notebook source
+# MAGIC %md
+# MAGIC 
+# MAGIC # Loads Zeek Logs & Email Alerts
+
+# COMMAND ----------
+
 # MAGIC %run ./01_config
 
 # COMMAND ----------
@@ -15,6 +21,7 @@ for d in ddls:
 
 # COMMAND ----------
 
+# DBTITLE 1,Download the zeek & email data
 # MAGIC %sh
 # MAGIC 
 # MAGIC mkdir /dbfs/tmp/forensics2021
@@ -31,6 +38,7 @@ for d in ddls:
 
 # COMMAND ----------
 
+# DBTITLE 1,Load the zeek and email data
 from pyspark.sql.functions import col
 from pyspark.sql.types import *
 
@@ -55,6 +63,7 @@ df.write.option("mergeSchema", "true").partitionBy("alertDate").mode("append").s
 
 # COMMAND ----------
 
+# DBTITLE 1,Creates the view that maps the zeek schemas to a graph data model.
 def gen_create_view(db, tblist, view_name):
   ddl = f"""CREATE VIEW IF NOT EXISTS {db}.{view_name}\nAS\n"""
   db = getParam('db')
@@ -70,6 +79,7 @@ SELECT {db}.{t}.`id.orig_h` AS src,
        to_json(struct({db}.{t}.*)) AS raw
 FROM {db}.{t}"""
     querylist.append(sqlstr)
+  # Additional edge extraction logic for specific protocols
   sqlstr = f"""
 select `id.orig_h` as src, query as dst, 'dns-query' as edge_type, ts::timestamp, eventDate,
        to_json(struct({db}.dns.*)) AS raw
@@ -107,6 +117,36 @@ spark.sql(ddl)
 # MAGIC 
 # MAGIC select *
 # MAGIC from forensics_lipyeow_lim.edges
+
+# COMMAND ----------
+
+# DBTITLE 1,Load a minimal threat intelligence table to simulate ingest-time enrichments
+ddls = []
+ddls.append(f"DROP TABLE IF EXISTS {getParam('db')}.threat_intel")
+ddls.append(f"CREATE TABLE IF NOT EXISTS {getParam('db')}.threat_intel (obs_value string, obs_type string, disposition string, details string)")
+
+intel = [
+  """('kamuchehddhgfgf.ddns.net', 'fqdn', 'malicious', '{"src": "https://tria.ge/211103-1q6ljacear"}')""",
+  """('37.0.10.22', 'ipv4', 'malicious', '{"src": "https://tria.ge/211103-1q6ljacear"}')""",
+  """('sobolpand.top', 'fqdn', 'malicious', '{"src": "https://urlhaus.abuse.ch/host/sobolpand.top/"}')""",
+  """('104.21.65.22', 'ipv4', 'malicious', '{"src": "https://urlhaus.abuse.ch/host/sobolpand.top/"}')""",
+  """('23.111.114.52', 'ipv4', 'malicious', '{"src": "https://tria.ge/211103-27thzacehl"}')""",
+  """('194.36.191.35', 'ipv4', 'malicious', '{"src": "https://www.virustotal.com/gui/url/8a43933c6fe8f02fdd6606530b0671d9a9ef3258a12c4f4ff069385896979b11"}')""",
+  """('gamaes.shop', 'fqdn', 'malicious', '{"src": "https://urlhaus.abuse.ch/url/1844646/"}')""",
+  """('newsaarctech.com', 'fqdn', 'malicious', '{"src": "https://urlhaus.abuse.ch/url/1844645/"}')"""
+]
+ddls.append(f"""INSERT INTO {getParam('db')}.threat_intel VALUES {','.join(intel)}""")
+  
+for ddl in ddls:
+  print(ddl)
+  spark.sql(ddl)
+
+# COMMAND ----------
+
+# DBTITLE 1,Check if threat_intel table is loaded correctly
+sqlstr = f"select * from {getParam('db')}.threat_intel"
+
+display(spark.sql(sqlstr))
 
 # COMMAND ----------
 
