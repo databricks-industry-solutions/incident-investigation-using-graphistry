@@ -34,8 +34,10 @@ spark.conf.set("spark.sql.execution.arrow.enabled", "true")
 
 import graphistry  # if not yet available, install and/or restart Python kernel using the above
 
+user = dbutils.secrets.get(scope="solution-accelerator-cicd", key="graphistry-username")
+pw = dbutils.secrets.get(scope="solution-accelerator-cicd", key="graphistry-password")
 # To specify Graphistry account & server, use:
-graphistry.register(api=3, username='lipyeow', password=dbutils.secrets.get(scope="lipyeow-sec01", key="graphistry-pw"), protocol='https', server='hub.graphistry.com')
+graphistry.register(api=3, username=user, password=pw, protocol='https', server='hub.graphistry.com')
 # For more options, see https://github.com/graphistry/pygraphistry#configure
 
 graphistry.__version__
@@ -105,7 +107,7 @@ display(df)
 # MAGIC   
 # MAGIC ## 2021-10-22: Email Alert - NanoCore RAT
 # MAGIC 
-# MAGIC * Examining the email, you see that it was received by `macrus.cobb@enemywatch.net`
+# MAGIC * Inspecting the email, observe that it was received by `macrus.cobb@enemywatch.net`
 # MAGIC * Using the inspect->table in Graphistry UI, use the search on the points:
 # MAGIC   * `macrus` got no hits
 # MAGIC   * `cobb` got a hit for kerberos client `marcus.cobb@ENEMYWATCH`. 
@@ -117,15 +119,6 @@ display(df)
 # MAGIC * Looking at the edges between `10.10.22.157` and `37.0.10.22`, observe the many `conn` edges (connections) indicating data transfers.
 # MAGIC * There is sufficient evidence that `10.10.22.157` has been infected with malware.
 # MAGIC * You are now ready to write an incident report and take the required remediation actions.
-
-# COMMAND ----------
-
-# MAGIC %sql
-# MAGIC 
-# MAGIC select e.*, t.* 
-# MAGIC from forensics_lipyeow_lim.edges AS e left outer join forensics_lipyeow_lim.threat_intel AS t ON e.dst = t.obs_value
-# MAGIC where edge_type='http'
-# MAGIC and dst='194.36.191.35'
 
 # COMMAND ----------
 
