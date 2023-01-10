@@ -1,7 +1,7 @@
 # Databricks notebook source
 # MAGIC %md
 # MAGIC 
-# MAGIC # Investigation using Graphistry Visual Analytics
+# MAGIC # Investigation Workflow using Graphistry Visual Analytics
 # MAGIC 
 # MAGIC The 2021-10-22 use case is adapted from the SANS Internet Storm Center's October 2021 Contest:
 # MAGIC * Question: https://isc.sans.edu/diary/October+2021+Contest+Forensic+Challenge/27960
@@ -19,7 +19,6 @@
 # COMMAND ----------
 
 dbutils.widgets.dropdown("date_filter", "2021-10-22", ["2021-10-22", "2021-12-03"])
-date_filter = dbutils.widgets.get("date_filter")
 
 # COMMAND ----------
 
@@ -44,9 +43,10 @@ graphistry.__version__
 
 # COMMAND ----------
 
-# DBTITLE 1,Get the vertices & edges from delta lake
+# DBTITLE 1,Get the vertices & edges from delta lake & send to graphistry
 edges_table = f"{getParam('db')}.{getParam('view_name')}"
 threat_intel = f"{getParam('db')}.threat_intel"
+date_filter = dbutils.widgets.get("date_filter")
 
 v = spark.sql(f"""
 SELECT distinct e.src AS id, e.src AS name, t.disposition AS intel
@@ -66,8 +66,6 @@ WHERE eventDate = '{date_filter}'
 
 #print(e.count())
 display(e)
-
-# COMMAND ----------
 
 p = (graphistry
     .bind(point_title='name')
