@@ -29,6 +29,11 @@
 # MAGIC 
 # MAGIC ## Technical Overview
 # MAGIC 
+# MAGIC * Leverage any cybersecurity data in the lakehouse without transforming the data into a graph data model at ingestion time.
+# MAGIC * Dynamically run a query to filter the data and convert to graph data model at analysis time. This flexibility allows the analyst to tweak the graph data model at will during analysis.
+# MAGIC * Send the resultant data frames (nodes and edges) to graphistry for visualization
+# MAGIC * Perform investigation and analysis in graphistry UI without writing any code
+# MAGIC 
 # MAGIC ___
 # MAGIC 
 # MAGIC &copy; 2022 Databricks, Inc. All rights reserved. The source in this notebook is provided subject to the Databricks License [https://databricks.com/db-license-source].  All included or referenced third party libraries are subject to the licenses set forth below.
@@ -42,9 +47,13 @@
 # MAGIC 1. Create a free graphistry account at https://hub.graphistry.com/ if you do not already have an account. Take note of your graphistry username and password. You will need them to use the graphistry visualization in the notebooks.
 # MAGIC 2. Install the databricks CLI using the instructions: https://docs.databricks.com/dev-tools/cli/index.html
 # MAGIC 3. Create a secret scope using the databricks CLI: 
-# MAGIC     databricks secrets create-scope --scope lipyeow-sec01
-# MAGIC 4. Create a secret key storing the graphistry password:
-# MAGIC     databricks secrets put --scope lipyeow-sec01 --key graphistry-pw
+# MAGIC     
+# MAGIC     `databricks secrets create-scope --scope solution-accelerator-cicd`
+# MAGIC 4. Create a secret key storing the graphistry username and password:
+# MAGIC 
+# MAGIC     `databricks secrets put --scope solution-accelerator-cicd --key graphistry-username`
+# MAGIC 
+# MAGIC     `databricks secrets put --scope solution-accelerator-cicd --key graphistry-password`
 # MAGIC 
 # MAGIC You could skip steps 2-4 above and put your graphistry password into the notebooks, but that is not recommended, because it is not a security best practice.
 # MAGIC 
@@ -69,3 +78,7 @@
 # MAGIC Please note the code in this project is provided for your exploration only, and are not formally supported by Databricks with Service Level Agreements (SLAs). They are provided AS-IS and we do not make any guarantees of any kind. Please do not submit a support ticket relating to any issues arising from the use of these projects. The source in this project is provided subject to the Databricks [License](./LICENSE). All included or referenced third party libraries are subject to the licenses set forth below.
 # MAGIC 
 # MAGIC Any issues discovered through the use of this project should be filed as GitHub Issues on the Repo. They will be reviewed as time permits, but there are no formal SLAs for support. 
+
+# COMMAND ----------
+
+
