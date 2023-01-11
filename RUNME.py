@@ -37,18 +37,30 @@ job_json = {
         "max_concurrent_runs": 1,
         "tags": {
             "usage": "solacc_testing",
-            "group": "SOLACC"
+            "group": "SEC"
         },
         "tasks": [
             {
-                "job_cluster_key": "sample_solacc_cluster",
+                "job_cluster_key": "inc_inv_cluster",
+                "notebook_task": {
+                    "notebook_path": f"01_README"
+                },
+                "task_key": "01_README"
+            },
+            {
+                "job_cluster_key": "inc_inv_cluster",
                 "notebook_task": {
                     "notebook_path": f"02_load_data"
                 },
-                "task_key": "02_load_data"
+                "task_key": "02_load_data",
+                "depends_on": [
+                    {
+                        "task_key": "01_README"
+                    }
+                ]
             },
             {
-                "job_cluster_key": "sample_solacc_cluster",
+                "job_cluster_key": "inc_inv_cluster",
                 "notebook_task": {
                     "notebook_path": f"03_visual_analytics1"
                 },
@@ -62,7 +74,7 @@ job_json = {
         ],
         "job_clusters": [
             {
-                "job_cluster_key": "sample_solacc_cluster",
+                "job_cluster_key": "inc_inv_cluster",
                 "new_cluster": {
                     "spark_version": "11.3.x-cpu-ml-scala2.12",
                 "spark_conf": {

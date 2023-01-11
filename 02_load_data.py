@@ -1,18 +1,23 @@
 # Databricks notebook source
+# MAGIC %md This notebook is available at https://github.com/databricks-industry-solutions/incident-investigation-using-graphistry
+
+# COMMAND ----------
+
 # MAGIC %md
 # MAGIC 
 # MAGIC # Loads Zeek Logs & Email Alerts
 
 # COMMAND ----------
 
-# MAGIC %run ./01_config
+# MAGIC %run ./config/notebook_config
 
 # COMMAND ----------
 
 # DBTITLE 1,Recreate Database/Schema
 ddls = [
 f"""DROP SCHEMA IF EXISTS {getParam('db')} CASCADE""",
-f"""CREATE SCHEMA IF NOT EXISTS {getParam('db')} LOCATION '{getParam('data_path')}'"""    
+f"""CREATE SCHEMA IF NOT EXISTS {getParam('db')} LOCATION '{getParam('data_path')}'""" ,
+f"""USE {getParam('db')}""" 
 ]
 
 for d in ddls:
@@ -109,14 +114,14 @@ spark.sql(ddl)
 # MAGIC %sql
 # MAGIC 
 # MAGIC select detection_ts, category, name, priority, left(raw, 200) as raw_prefix
-# MAGIC from forensics_lipyeow_lim.email_alerts
+# MAGIC from email_alerts
 
 # COMMAND ----------
 
 # MAGIC %sql
 # MAGIC 
 # MAGIC select *
-# MAGIC from forensics_lipyeow_lim.edges
+# MAGIC from edges
 
 # COMMAND ----------
 
