@@ -42,12 +42,13 @@ ___
 2. Install the databricks CLI using the instructions: https://docs.databricks.com/dev-tools/cli/index.html
 3. Create a secret scope using the databricks CLI: 
 
-    databricks secrets create-scope --scope solution-accelerator-cicd
+    `databricks secrets create-scope --scope solution-accelerator-cicd`
 
 4. Create two secret keys for storing the graphistry username and password:
 
-    databricks secrets put --scope solution-accelerator-cicd --key graphistry-username
-    databricks secrets put --scope solution-accelerator-cicd --key graphistry-password
+    `databricks secrets put --scope solution-accelerator-cicd --key graphistry-username`
+
+    `databricks secrets put --scope solution-accelerator-cicd --key graphistry-password`
  
 You could skip steps 2-4 above and put your graphistry password into the notebooks, but that is not recommended, because it is not a security best practice.
 
