@@ -1,4 +1,8 @@
 # Databricks notebook source
+# MAGIC %md This notebook is available at https://github.com/databricks-industry-solutions/incident-investigation-using-graphistry
+
+# COMMAND ----------
+
 # MAGIC %md
 # MAGIC 
 # MAGIC # Investigation Workflow using Graphistry Visual Analytics
@@ -14,7 +18,7 @@
 
 # COMMAND ----------
 
-# MAGIC %run ./01_config
+# MAGIC %run ./config/notebook_config
 
 # COMMAND ----------
 
@@ -86,6 +90,12 @@ FROM {getParam('db')}.email_alerts
 """
 df = spark.sql(sqlstr)
 display(df)
+
+# COMMAND ----------
+
+displayHTML("""<iframe width="420" height="315"
+src="https://www.youtube.com/embed/tgbNymZ7vqY">
+</iframe>""") # dummy video to show how to embed Youtube videos into notebooks
 
 # COMMAND ----------
 
