@@ -23,6 +23,11 @@ The above reference architecture only shows a specific data path for network pac
 
 ## Technical Overview
 
+* Leverage any cybersecurity data in the lakehouse without transforming the data into a graph data model at ingestion time.
+* Dynamically run a query to filter the data and convert to graph data model at analysis time. This flexibility allows the analyst to tweak the graph data model at will during analysis.
+* Send the resultant data frames (nodes and edges) to graphistry for visualization
+* Perform investigation and analysis in graphistry UI without writing any code
+
 ___
 
 &copy; 2022 Databricks, Inc. All rights reserved. The source in this notebook is provided subject to the Databricks License [https://databricks.com/db-license-source].  All included or referenced third party libraries are subject to the licenses set forth below.
@@ -36,10 +41,14 @@ ___
 1. Create a free graphistry account at https://hub.graphistry.com/ if you do not already have an account. Take note of your graphistry username and password. You will need them to use the graphistry visualization in the notebooks.
 2. Install the databricks CLI using the instructions: https://docs.databricks.com/dev-tools/cli/index.html
 3. Create a secret scope using the databricks CLI: 
-    databricks secrets create-scope --scope lipyeow-sec01
-4. Create a secret key storing the graphistry password:
-    databricks secrets put --scope lipyeow-sec01 --key graphistry-pw
 
+    databricks secrets create-scope --scope solution-accelerator-cicd
+
+4. Create two secret keys for storing the graphistry username and password:
+
+    databricks secrets put --scope solution-accelerator-cicd --key graphistry-username
+    databricks secrets put --scope solution-accelerator-cicd --key graphistry-password
+ 
 You could skip steps 2-4 above and put your graphistry password into the notebooks, but that is not recommended, because it is not a security best practice.
 
 ## Getting started
