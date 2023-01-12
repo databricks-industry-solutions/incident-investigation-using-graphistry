@@ -93,12 +93,6 @@ display(df)
 
 # COMMAND ----------
 
-displayHTML("""<iframe width="420" height="315"
-src="https://www.youtube.com/embed/tgbNymZ7vqY">
-</iframe>""") # dummy video to show how to embed Youtube videos into notebooks
-
-# COMMAND ----------
-
 # MAGIC %md
 # MAGIC 
 # MAGIC # Investigation Flow
@@ -130,23 +124,10 @@ src="https://www.youtube.com/embed/tgbNymZ7vqY">
 
 # COMMAND ----------
 
-# MAGIC %md
-# MAGIC 
-# MAGIC ## 2021-10-22 Email Alert - "Stolen Images Evidence"
-# MAGIC 
-# MAGIC * Examining the email, we see that the receipient is `kevin.henderson`.
-# MAGIC * Using the `INSPECT`->`Data Table` in Graphistry UI, use the tab for points, and search for `kevin`.
-# MAGIC * Click on the row for `kevin` to highlight the node in the visualization.
-# MAGIC * Observe that Kevin is associated with the machine with IPv4 `10.10.22.158`.
-# MAGIC * Looking at other `kerberos-client` edges, observe that the machine is associated with host name `DESKTOP-87WCE26`.
-# MAGIC * From the node info pop out on the top-right, click on the round circle (Toggle Selection Expander), then click on the tick or check mark twice.
-# MAGIC * Click the filter icon on the left side of the pop up to filter out the edges not in the selection. Re-center and re-cluster as needed.
-# MAGIC * Look for nodes in the sub-graph that are red in color - nodes considered malicious by threat intelligence are colored red.
-# MAGIC * Zoom in on the red node. Observe that it corresponds to an fqdn `sobolpand.top` and `10.10.22.158` has made DNS requests for it. See https://urlhaus.abuse.ch/host/sobolpand.top/
-# MAGIC * Observe that the `dns-answer` edge resolves the malicious fqdn to `172.67.139.101` which is likely a C2 server.
-# MAGIC * Click on `dns-answer` edge and click the circle icon to get the toggle selection expander. Click on the check mark twice and click filter. Re-center and re-cluster as needed.
-# MAGIC * Observe that there are three edges between `10.10.22.158` and `172.67.139.101`. The two `http` edges indicate requests for files; the one `conn` edge indicates a file transfer.
-# MAGIC * At this point, there is sufficient evidence that `10.10.22.158` is infected and communicates with a C2 server corresponding `sobolpand.top`.
+htmlstr = """
+<iframe width="560" height="315" src="https://www.youtube.com/embed/1Q13SOCab9g" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+"""
+displayHTML(htmlstr)
 
 # COMMAND ----------
 
@@ -172,11 +153,45 @@ src="https://www.youtube.com/embed/tgbNymZ7vqY">
 
 # COMMAND ----------
 
+htmlstr = """
+<iframe width="560" height="315" src="https://www.youtube.com/embed/_H-wou0PT-M" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+"""
+displayHTML(htmlstr)
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC 
+# MAGIC ## 2021-10-22 Email Alert - "Stolen Images Evidence"
+# MAGIC 
+# MAGIC * Examining the email, we see that the receipient is `kevin.henderson`.
+# MAGIC * Using the `INSPECT`->`Data Table` in Graphistry UI, use the tab for points, and search for `kevin`.
+# MAGIC * Click on the row for `kevin` to highlight the node in the visualization.
+# MAGIC * Observe that Kevin is associated with the machine with IPv4 `10.10.22.158`.
+# MAGIC * Looking at other `kerberos-client` edges, observe that the machine is associated with host name `DESKTOP-87WCE26`.
+# MAGIC * From the node info pop out on the top-right, click on the round circle (Toggle Selection Expander), then click on the tick or check mark twice.
+# MAGIC * Click the filter icon on the left side of the pop up to filter out the edges not in the selection. Re-center and re-cluster as needed.
+# MAGIC * Look for nodes in the sub-graph that are red in color - nodes considered malicious by threat intelligence are colored red.
+# MAGIC * Zoom in on the red node. Observe that it corresponds to an fqdn `sobolpand.top` and `10.10.22.158` has made DNS requests for it. See https://urlhaus.abuse.ch/host/sobolpand.top/
+# MAGIC * Observe that the `dns-answer` edge resolves the malicious fqdn to `172.67.139.101` which is likely a C2 server.
+# MAGIC * Click on `dns-answer` edge and click the circle icon to get the toggle selection expander. Click on the check mark twice and click filter. Re-center and re-cluster as needed.
+# MAGIC * Observe that there are three edges between `10.10.22.158` and `172.67.139.101`. The two `http` edges indicate requests for files; the one `conn` edge indicates a file transfer.
+# MAGIC * At this point, there is sufficient evidence that `10.10.22.158` is infected and communicates with a C2 server corresponding `sobolpand.top`.
+
+# COMMAND ----------
+
+htmlstr = """
+<iframe width="560" height="315" src="https://www.youtube.com/embed/pZEfxVpRE7o" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+"""
+displayHTML(htmlstr)
+
+# COMMAND ----------
+
 # MAGIC %md
 # MAGIC 
 # MAGIC * A Tier 1 SOC analyst noticed some suspicious network traffic on Dec 3, 2021 and asked you to take a look at the PCAP.
 # MAGIC 
-# MAGIC ## 2021-12-03: SpamBot
+# MAGIC ## 2021-12-03: Emotet SpamBot
 # MAGIC 
 # MAGIC * Just looking at the Graphistry visualization, it is clear that `10.12.3.66` is connecting with an unusually large number of other hosts.
 # MAGIC * Click on `10.12.3.66`.
@@ -193,3 +208,15 @@ src="https://www.youtube.com/embed/tgbNymZ7vqY">
 # MAGIC * On the histogram filter on `edge:relationship`, click on the bar for `smtp`. Observe the unusual number of connections to different smtp servers. Repeat for `ssl` handshakes.
 # MAGIC * At this point, there is sufficient evidence that `10.12.3.66` is infected with the emotet malware.
 # MAGIC * You are now ready to write an incident report and take the required remediation actions.
+
+# COMMAND ----------
+
+# DBTITLE 1,Demo video
+htmlstr="""
+<iframe width="560" height="315" src="https://www.youtube.com/embed/tpeFjM4wlmY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+"""
+displayHTML(htmlstr)
+
+# COMMAND ----------
+
+
