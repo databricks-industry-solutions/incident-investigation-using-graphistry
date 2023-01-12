@@ -7,6 +7,10 @@
 # MAGIC 
 # MAGIC # Investigation Workflow using Graphistry Visual Analytics
 # MAGIC 
+# MAGIC Run the `02_load_data.py` notebook first to load the required data sets before running this notebook. This notebook demonstrates how to use Databricks and Graphistry for a forensics investigation on L7 metadata (extracted from PCAP using Zeek). The 4 incidents are derived from the sources listed below. The key difference between this notebook and the original use case is that the original use cases assume full access to the PCAP including the binaries/payload in the PCAP - this notebook only rely on the L7 metadata and some threat intelligence for the investigation workflow.
+# MAGIC 
+# MAGIC ## Source Materials
+# MAGIC 
 # MAGIC The 2021-10-22 use case is adapted from the SANS Internet Storm Center's October 2021 Contest:
 # MAGIC * Question: https://isc.sans.edu/diary/October+2021+Contest+Forensic+Challenge/27960
 # MAGIC * Solution: https://isc.sans.edu/diary/October+2021+Forensic+Contest+Answers+and+Analysis/27998
