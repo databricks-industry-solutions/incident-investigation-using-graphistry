@@ -67,6 +67,12 @@ To start using a solution accelerator in Databricks simply follow these steps:
 
 The cost associated with running the accelerator is the user's responsibility.
 
+## Acknowledgements
+
+This solution accelerator would not be possible without the collaboration and support of:
+
+* Leo Meyerovich, Graphistry
+* Thomas Cook, Graphistry
 
 ## Project support 
 
