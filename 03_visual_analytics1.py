@@ -27,6 +27,7 @@
 # COMMAND ----------
 
 dbutils.widgets.dropdown("date_filter", "2021-10-22", ["2021-10-22", "2021-12-03"])
+dbutils.widgets.dropdown("color_threat_intel", "yes", ["yes", "no"])
 
 # COMMAND ----------
 
@@ -55,6 +56,7 @@ graphistry.__version__
 edges_table = f"{getParam('db')}.{getParam('view_name')}"
 threat_intel = f"{getParam('db')}.threat_intel"
 date_filter = dbutils.widgets.get("date_filter")
+color_threat_intel = dbutils.widgets.get("color_threat_intel")
 
 v = spark.sql(f"""
 SELECT distinct e.src AS id, e.src AS name, t.disposition AS intel
@@ -75,15 +77,20 @@ WHERE eventDate = '{date_filter}'
 #print(e.count())
 display(e)
 
-p = (graphistry
+g = (graphistry
     .bind(point_title='name')
     .nodes(v, 'id')
     .bind(edge_title='relationship')
     .edges(e, 'src', 'dst')
     .settings(url_params={'strongGravity': 'true'})
-    .encode_point_color('intel', categorical_mapping={'malicious': '#F44'}, default_mapping='#09F')
+    )
+if color_threat_intel=="yes":
+  p = (g.encode_point_color('intel', categorical_mapping={'malicious': '#F44'}, default_mapping='#09F')
     .plot()
-)
+  )
+else:
+  p = (g.plot()
+  )
 p
 
 # COMMAND ----------
