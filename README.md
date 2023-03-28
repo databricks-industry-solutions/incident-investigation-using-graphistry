@@ -9,7 +9,7 @@ Contact Author: <lipyeow.lim@databricks.com>
 
 ## Use Cases
 
-Personas: SOC analyts, Incident Responders, Threat Hunters
+Personas: SOC analysts, Incident Responders, Threat Hunters
 
 * Investigate an incident or alert to determine if it is true positive or false positive. If it is a true positive, determine the host and users impacted, so that remediation steps can be taken.
 * Investigate leads from a threat hunting exercise.
