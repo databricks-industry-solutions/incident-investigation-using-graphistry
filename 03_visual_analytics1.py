@@ -4,19 +4,19 @@
 # COMMAND ----------
 
 # MAGIC %md
-# MAGIC 
+# MAGIC
 # MAGIC # Investigation Workflow using Graphistry Visual Analytics
-# MAGIC 
+# MAGIC
 # MAGIC Run the `02_load_data.py` notebook first to load the required data sets before running this notebook. This notebook demonstrates how to use Databricks and Graphistry for a forensics investigation on L7 metadata (extracted from PCAP using Zeek). The 4 incidents are derived from the sources listed below. The key difference between this notebook and the original use cases is that the original use cases assume full access to the PCAP including the binaries/payload in the PCAP - this notebook only rely on the L7 metadata and some threat intelligence for the investigation workflow.
-# MAGIC 
+# MAGIC
 # MAGIC ## Source Materials
-# MAGIC 
+# MAGIC
 # MAGIC The 2021-10-22 use case is adapted from the SANS Internet Storm Center's October 2021 Contest and consist of three tasks/incidents:
 # MAGIC * Question: https://isc.sans.edu/diary/October+2021+Contest+Forensic+Challenge/27960
 # MAGIC * Solution: https://isc.sans.edu/diary/October+2021+Forensic+Contest+Answers+and+Analysis/27998
-# MAGIC 
+# MAGIC
 # MAGIC The 2021-12-03 use case is adapted from the SANS Internet Storm Center's December 2021 Contest ans consist of one task/incident:
-# MAGIC 
+# MAGIC
 # MAGIC * Question: https://isc.sans.edu/diary/December+2021+Forensic+Challenge/28108
 # MAGIC * Solution: https://isc.sans.edu/diary/December+2021+Forensic+Contest+Answers+and+Analysis/28160
 
@@ -32,7 +32,7 @@ dbutils.widgets.dropdown("color_threat_intel", "yes", ["yes", "no"])
 # COMMAND ----------
 
 # DBTITLE 1,Install graphistry
-! pip install graphistry
+# MAGIC %pip install graphistry==0.28.7
 
 # COMMAND ----------
 
@@ -105,9 +105,9 @@ display(df)
 # COMMAND ----------
 
 # MAGIC %md
-# MAGIC 
+# MAGIC
 # MAGIC # Investigation Flow
-# MAGIC 
+# MAGIC
 # MAGIC * You are a Tier 2 SOC analyst
 # MAGIC * You are investigating three email alerts where the alert and the eml file is in the `email_alerts` table.
 # MAGIC * All three emails have attachments containing malware
@@ -119,7 +119,7 @@ display(df)
 # MAGIC   * Which users are involved on those infected machines
 # MAGIC   
 # MAGIC ## 2021-10-22: Email Alert - NanoCore RAT
-# MAGIC 
+# MAGIC
 # MAGIC * Inspecting the email, observe that it was received by `macrus.cobb@enemywatch.net`
 # MAGIC * Using the inspect->table in Graphistry UI, use the search on the points:
 # MAGIC   * `macrus` got no hits
@@ -143,9 +143,9 @@ displayHTML(htmlstr)
 # COMMAND ----------
 
 # MAGIC %md
-# MAGIC 
+# MAGIC
 # MAGIC ## 2021-10-22: Email Alert - Qakbot
-# MAGIC 
+# MAGIC
 # MAGIC * Examining the email, we see that the receipient is `agnes.warren`.
 # MAGIC * Using the `INSPECT`->`Data Table` in Graphistry UI, use the tab for points, and search for `agnes`.
 # MAGIC * Click on the row for `agnes` to highlight the node in the visualization.
@@ -172,9 +172,9 @@ displayHTML(htmlstr)
 # COMMAND ----------
 
 # MAGIC %md
-# MAGIC 
+# MAGIC
 # MAGIC ## 2021-10-22 Email Alert - "Stolen Images Evidence"
-# MAGIC 
+# MAGIC
 # MAGIC * Examining the email, we see that the receipient is `kevin.henderson`.
 # MAGIC * Using the `INSPECT`->`Data Table` in Graphistry UI, use the tab for points, and search for `kevin`.
 # MAGIC * Click on the row for `kevin` to highlight the node in the visualization.
@@ -199,11 +199,11 @@ displayHTML(htmlstr)
 # COMMAND ----------
 
 # MAGIC %md
-# MAGIC 
+# MAGIC
 # MAGIC * A Tier 1 SOC analyst noticed some suspicious network traffic on Dec 3, 2021 and asked you to take a look at the PCAP.
-# MAGIC 
+# MAGIC
 # MAGIC ## 2021-12-03: Emotet SpamBot
-# MAGIC 
+# MAGIC
 # MAGIC * Just looking at the Graphistry visualization, it is clear that `10.12.3.66` is connecting with an unusually large number of other hosts.
 # MAGIC * Click on `10.12.3.66`.
 # MAGIC * In the node info popup on the top right, click the circle icon for the toggle selection expander. Click the check mark once and click on the filter icon to focus on the neighborhood of `10.12.3.66`
