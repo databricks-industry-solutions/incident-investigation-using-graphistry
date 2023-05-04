@@ -22,17 +22,17 @@
 
 # COMMAND ----------
 
+# DBTITLE 1,Install graphistry
+# MAGIC %pip install graphistry==0.28.7
+
+# COMMAND ----------
+
 # MAGIC %run ./config/notebook_config
 
 # COMMAND ----------
 
 dbutils.widgets.dropdown("date_filter", "2021-10-22", ["2021-10-22", "2021-12-03"])
 dbutils.widgets.dropdown("color_threat_intel", "yes", ["yes", "no"])
-
-# COMMAND ----------
-
-# DBTITLE 1,Install graphistry
-# MAGIC %pip install graphistry==0.28.7
 
 # COMMAND ----------
 
