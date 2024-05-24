@@ -5,7 +5,7 @@
 
 # Incident Investigation using Graphistry
 
-Contact Author: <lipyeow.lim@databricks.com>
+Contact Author: <cybersecurity@databricks.com>
 
 ## Use Cases
 
